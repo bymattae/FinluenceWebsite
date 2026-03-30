@@ -1,0 +1,1691 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finluence — Creators</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+
+      :root {
+        --bg: #0a0f0e;
+        --card: #111a18;
+        --text-1: #ffffff;
+        --text-2: #ffffff;
+        --radius: 16px;
+        --gap: 8px;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: var(--bg);
+        color: var(--text-2);
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { display: block; max-width: 100%; }
+
+      .wrap {
+        max-width: 100%;
+        margin: 0 auto;
+        padding-inline: 56px;
+      }
+
+      /* ─────────────────────── NAV ─────────────────────── */
+      nav {
+        position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+        background: transparent;
+      }
+
+      .nav-inner {
+        max-width: 100%; margin: 0 auto; padding-inline: 28px;
+        height: 64px;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+        text-transform: lowercase; color: var(--text-1);
+      }
+
+      .nav-links { display: flex; gap: 6px; align-items: center; }
+
+      .nav-links a {
+        font-size: 16px; font-weight: 500; color: #ffffff;
+        padding: 8px 20px;
+        border-radius: 999px;
+        border: none;
+        transition: all 250ms ease;
+        background: transparent;
+      }
+      .nav-links a:hover {
+        color: #0a0a0a;
+        background: #ffffff;
+      }
+
+      /* ─────────────────────── BUTTONS ─────────────────────── */
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 11px 24px; border-radius: 999px;
+        font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+        transition: transform 120ms, opacity 120ms;
+      }
+      .btn:hover { transform: translateY(-1px); }
+
+      .btn--purple {
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+      .btn--purple:hover {
+        background: #f0f0f0;
+      }
+      .btn--dark {
+        background: #0a0a0a;
+        color: #fff;
+      }
+      .btn--white {
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+      /* Desktop-only / mobile-only section buttons */
+      .btn-section-mobile { display: none; }
+      .btn--outline {
+        background: transparent;
+        color: #fff;
+        border: 1px solid rgba(255,255,255,0.3);
+      }
+      .btn--outline:hover {
+        background: rgba(255,255,255,0.08);
+      }
+
+      /* ─────────────────────── 1. HERO ─────────────────────── */
+      .hero {
+        position: relative;
+        height: 100svh; min-height: 600px;
+        display: flex; align-items: flex-end; justify-content: center;
+        padding-bottom: 80px;
+        overflow: hidden;
+      }
+
+      .hero video {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%; object-fit: cover;
+        opacity: 0.4;
+      }
+
+      .hero .hero-bg {
+        display: none;
+      }
+
+      .hero::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(10,15,14,0) 0%, rgba(10,15,14,0) 30%, rgba(10,15,14,0.97) 100%);
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative; z-index: 2;
+        text-align: center;
+        max-width: none; padding: 0 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 4.5vw, 62px);
+        font-weight: 600; line-height: 0.95;
+        white-space: normal;
+        letter-spacing: -0.04em; color: var(--text-1);
+        margin-bottom: 16px;
+      }
+
+      .hero p {
+        font-size: 20px; color: var(--text-2);
+        margin-bottom: 0;
+        font-weight: 400; line-height: 1.7;
+      }
+
+      /* ─────────────────────── 2. SLIDING CARDS ─────────────────────── */
+      .capabilities {
+        padding: 55px 0;
+      }
+      .cap-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 20px;
+      }
+      .cap-header-left h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 600; letter-spacing: -0.04em;
+        color: var(--text-1);
+        margin-bottom: 12px;
+        line-height: 1.1;
+      }
+      .cap-header-left p {
+        font-size: 18px; color: var(--text-2);
+        font-weight: 400; line-height: 1.7;
+      }
+
+      .cap-track-wrapper {
+        position: relative;
+      }
+
+      /* Overlay carousel arrows — shared between cap & case */
+      .carousel-arrow {
+        position: absolute;
+        top: 50%; transform: translateY(-50%);
+        z-index: 10;
+        width: 44px; height: 44px;
+        border: none;
+        background: none;
+        color: #fff;
+        font-size: 36px; font-weight: 400;
+        cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        transition: opacity 200ms;
+        opacity: 0.7;
+        text-shadow: 0 1px 6px rgba(0,0,0,0.5);
+      }
+      .carousel-arrow:hover {
+        opacity: 1;
+      }
+      .carousel-arrow.prev { left: 12px; }
+      .carousel-arrow.next { right: 12px; }
+
+      .cap-track {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        padding: 0 56px;
+        scrollbar-width: none;
+      }
+      .cap-track::-webkit-scrollbar { display: none; }
+
+      .cap-card {
+        flex: 0 0 calc((100vw - 112px - 60px) / 3.2);
+        min-width: 300px;
+        border-radius: 20px;
+        display: flex; flex-direction: column;
+        justify-content: flex-end;
+        min-height: 500px;
+        position: relative;
+        overflow: hidden;
+        background: #111a18;
+        transition: transform 300ms ease;
+        cursor: pointer;
+      }
+      .cap-card:hover { transform: translateY(-4px); }
+
+      .cap-card .cap-img {
+        position: absolute; inset: 0;
+        background-size: cover;
+        background-position: center;
+        transition: transform 500ms ease;
+      }
+      .cap-card:hover .cap-img { transform: scale(1.05); }
+
+      .cap-card .cap-scrim {
+        position: absolute; inset: 0;
+        background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.3) 40%, transparent 65%);
+      }
+
+      .cap-card .cap-content {
+        position: relative; z-index: 2;
+        padding: 28px;
+        display: flex; flex-direction: column; align-items: center;
+        text-align: center;
+      }
+
+      .cap-card h3 {
+        font-size: 22px; font-weight: 600;
+        color: #ffffff;
+        letter-spacing: -0.02em;
+        line-height: 1.1;
+        margin-bottom: 16px;
+      }
+
+      .cap-card .cap-desc {
+        font-size: 14px; font-weight: 400;
+        color: rgba(255,255,255,0.88);
+        line-height: 1.65;
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 400ms ease, opacity 300ms ease;
+        text-align: center;
+        margin-top: 0;
+      }
+      .cap-card.active .cap-desc {
+        max-height: 140px;
+        opacity: 1;
+        margin-top: 14px;
+      }
+      .cap-card.active .cap-scrim {
+        background: linear-gradient(0deg, rgba(0,0,0,0.96) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.25) 80%, transparent 100%);
+      }
+
+      /* ─────────────────────── 3. CARDS & NUMBERS ─────────────────────── */
+      .represent { padding: 55px 0; }
+
+      .mgmt-grid {
+        display: grid;
+        grid-template-columns: 52fr 48fr;
+        gap: 40px;
+        min-height: 340px;
+      }
+      .mgmt-photo {
+        border-radius: var(--radius); overflow: hidden;
+        position: relative; isolation: isolate;
+        border: 1px solid var(--border);
+      }
+      .mgmt-photo .bg {
+        position: absolute; inset: 0; z-index: -2;
+        background: url('public/creators/we-represent-you.jpeg') center center / cover;
+      }
+      .mgmt-photo .scrim {
+        position: absolute; inset: 0; z-index: -1;
+        background:
+          linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 45%),
+          linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 45%);
+      }
+      .mgmt-photo .inner {
+        position: absolute; inset: 0;
+        padding: 28px;
+        display: flex; flex-direction: column;
+        justify-content: space-between;
+      }
+      .mgmt-photo h3 {
+        font-size: clamp(30px, 3.2vw, 44px);
+        font-weight: 600; line-height: 1.1;
+        letter-spacing: -0.03em; color: var(--text-1);
+      }
+      .mgmt-photo .btn-row { align-self: flex-end; }
+
+      .mgmt-info {
+        display: flex; flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        height: 100%;
+      }
+
+      /* Magic text reveal */
+      .magic-text {
+        display: flex;
+        flex-wrap: wrap;
+        line-height: 1.35;
+      }
+      .magic-text .word {
+        position: relative;
+        margin-right: 0.3em;
+        font-size: clamp(20px, 1.9vw, 28px);
+        font-weight: 500;
+        line-height: 1.5;
+      }
+      .magic-text .word .ghost {
+        opacity: 0.25;
+        color: #ffffff;
+      }
+      .magic-text .word .reveal {
+        position: absolute;
+        top: 0; left: 0;
+        color: #ffffff;
+        opacity: 0;
+        transition: opacity 0.05s ease;
+      }
+
+      /* Stats row */
+      .stats-bar {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-top: 24px;
+      }
+      .stat {
+        display: flex; flex-direction: column;
+        text-align: left;
+        padding: 0;
+      }
+      .stat + .stat {
+        margin-left: 32px;
+        padding-left: 32px;
+        border-left: 1px solid rgba(255,255,255,0.12);
+      }
+      .stat .num {
+        font-size: clamp(28px, 2.6vw, 38px);
+        font-weight: 700; letter-spacing: -0.03em;
+        line-height: 1; color: #fff;
+      }
+      .stat .lbl {
+        font-size: 13px; font-weight: 400;
+        color: #ffffff;
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+
+      /* Sub cards - 4 column with icons */
+      .sub-cards {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+        margin-top: 32px;
+      }
+      .sub-card {
+        border: none;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        padding: 22px 18px 26px;
+        text-align: center;
+        display: flex; flex-direction: column;
+        align-items: center;
+        gap: 0;
+      }
+      .sub-card { background: #ffffff; }
+      .sub-card > * { position: relative; z-index: 1; }
+      .sub-card .sub-icon {
+        width: 48px; height: 48px;
+        margin-bottom: 16px;
+        display: flex; align-items: center; justify-content: center;
+      }
+      .sub-card .sub-icon svg {
+        width: 100%; height: 100%;
+        stroke: #0a0a0a; fill: none;
+        stroke-width: 1.2;
+        stroke-linecap: round; stroke-linejoin: round;
+      }
+      .sub-card h4 {
+        font-size: 22px; font-weight: 600;
+        color: #0a0a0a; line-height: 1.1;
+        margin-bottom: 10px;
+        max-width: 200px;
+      }
+      .sub-card p {
+        font-size: 12px; color: #0a0a0a;
+        line-height: 1.7;
+        font-weight: 400;
+      }
+
+      /* ─────────────────────── 4. HOW IT WORKS ─────────────────────── */
+      .how-it-works {
+        padding: 55px 0;
+        background: #0c1210;
+      }
+      .how-it-works .section-head {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .how-it-works .section-head h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 600; letter-spacing: -0.04em;
+        color: var(--text-1);
+        margin-bottom: 12px;
+        line-height: 1.1;
+      }
+      .how-it-works .section-head p {
+        font-size: 18px; color: var(--text-2);
+        font-weight: 400; line-height: 1.7;
+      }
+
+      .steps-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .step-card {
+        border-radius: 24px;
+        padding: 36px 32px;
+        min-height: 280px;
+        display: flex; flex-direction: column;
+        background: url('public/ultravibe.png') center / cover no-repeat;
+        position: relative;
+        overflow: hidden;
+      }
+      .step-card:nth-child(1) { background: url('public/moon.png') center / cover no-repeat; }
+      .step-card:nth-child(2) { background: url('public/ultravibe.png') center / cover no-repeat; }
+      .step-card:nth-child(3) { background: url('public/japaneasy.jpg') center / cover no-repeat; }
+
+      .step-number {
+        font-size: 64px; font-weight: 700;
+        color: rgba(255,255,255,0.15);
+        line-height: 1;
+        margin-bottom: 16px;
+      }
+      .step-card h3 {
+        font-size: 24px; font-weight: 600;
+        color: #ffffff;
+        margin-bottom: 12px;
+      }
+      .step-card p {
+        font-size: 15px; color: #ffffff;
+        line-height: 1.6;
+      }
+
+      /* ─────────────────────── 5. OUR CREATORS ─────────────────────── */
+      .our-creators {
+        padding: 55px 0;
+        background: #ffffff;
+      }
+      .our-creators .section-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+      }
+      .our-creators .section-head h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 600; letter-spacing: -0.04em;
+        color: #0a0a0a;
+        margin-bottom: 12px;
+        line-height: 1.1;
+      }
+      .our-creators .section-head p {
+        font-size: 18px; color: #0a0a0a;
+        font-weight: 400; line-height: 1.7;
+      }
+      .creators-grid {
+        columns: 3;
+        column-gap: 16px;
+        width: 100%;
+      }
+      .creator-card {
+        border-radius: 28px;
+        overflow: hidden;
+        position: relative;
+        background: linear-gradient(135deg, #f8c8d8, #d8c8f8, #c8d8f8);
+        break-inside: avoid;
+        margin-bottom: 16px;
+        display: inline-block;
+        width: 100%;
+      }
+      .creator-card:nth-child(1) .creator-img { height: 340px; }
+      .creator-card:nth-child(2) .creator-img { height: 450px; }
+      .creator-card:nth-child(3) .creator-img { height: 380px; }
+      .creator-card:nth-child(4) .creator-img { height: 420px; }
+      .creator-card:nth-child(5) .creator-img { height: 350px; }
+      .creator-card:nth-child(6) .creator-img { height: 420px; }
+      .creator-card .creator-img {
+        width: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform 400ms ease;
+      }
+      .creator-card .tag {
+        position: absolute;
+        top: 14px; left: 14px;
+        background: rgba(0,0,0,0.65);
+        color: #fff;
+        font-size: 11px; font-weight: 600;
+        padding: 6px 14px;
+        border-radius: 999px;
+      }
+      .creator-card .info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 7px 10px;
+        margin: 0 8px 8px;
+        background: rgba(255,255,255,0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 20px;
+        position: absolute;
+        bottom: 0; left: 0; right: 0;
+      }
+      .creator-card .info strong {
+        font-size: 15px; font-weight: 600;
+        color: #0a0a0a; display: block;
+      }
+      .creator-card .info span {
+        font-size: 12px; color: #0a0a0a;
+      }
+      .creator-card--cta {
+        text-decoration: none;
+        cursor: pointer;
+        transition: filter 200ms, transform 300ms;
+      }
+      .creator-card:hover .creator-img {
+        transform: scale(1.06);
+      }
+      .creator-card--cta:hover {
+        filter: brightness(1.05);
+      }
+      /* CTA card image flows naturally like other cards */
+      .creator-card--cta .info strong {
+        color: #0a0a0a;
+      }
+      .cta-apply {
+        font-size: 13px;
+        font-weight: 600;
+        color: #34d399;
+      }
+      .creator-card .info .flag {
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 2px solid rgba(255,255,255,0.8);
+      }
+
+      /* ─────────────────────── 6. CASE STUDIES ─────────────────────── */
+      .case-studies {
+        padding: 55px 0;
+      }
+      .case-studies .section-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        margin-bottom: 24px;
+      }
+      .case-studies .section-top h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 600; letter-spacing: -0.04em;
+        color: var(--text-1);
+        margin-bottom: 12px;
+        line-height: 1.1;
+      }
+      .case-studies .section-top p {
+        font-size: 18px; color: var(--text-2);
+        font-weight: 400; line-height: 1.7;
+      }
+      .case-carousel {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+        padding: 0 56px;
+        scrollbar-width: none;
+      }
+      .case-carousel::-webkit-scrollbar { display: none; }
+      .case-card {
+        flex: 0 0 calc((100vw - 112px - 20px) / 2);
+        min-width: 400px;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        background: #111a18;
+        height: 500px;
+        cursor: pointer;
+      }
+      .case-card .case-img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .case-card .case-scrim {
+        position: absolute; inset: 0;
+        background: linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.15) 30%, transparent 45%);
+      }
+      .case-card .case-info {
+        position: absolute;
+        bottom: 24px; left: 24px; right: 24px;
+      }
+      .case-card .case-tag {
+        font-size: 12px; font-weight: 600;
+        letter-spacing: 0.06em; text-transform: uppercase;
+        color: #ffffff;
+        margin-bottom: 6px;
+      }
+      .case-card .case-title {
+        font-size: clamp(20px, 2vw, 28px); font-weight: 600;
+        color: #fff; line-height: 1.1;
+        letter-spacing: -0.03em;
+      }
+      .case-carousel-wrap {
+        position: relative;
+      }
+
+      /* Case study modal */
+
+      /* ─────────────────────── 7. WHY FINLUENCE ─────────────────────── */
+      .why-finluence {
+        padding: 55px 0;
+        background: #111;
+      }
+      .why-finluence .section-head {
+        text-align: center;
+        margin-bottom: 28px;
+      }
+      .why-finluence .section-head h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 600; letter-spacing: -0.04em;
+        color: #fff;
+        margin-bottom: 12px;
+        line-height: 1.1;
+      }
+      .why-finluence .section-head p {
+        font-size: 18px; color: #ffffff;
+        font-weight: 400; line-height: 1.7;
+      }
+
+      .why-stats {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-bottom: 16px;
+      }
+      .why-stat-card {
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+        min-height: 320px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }
+      .why-stat-card img {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%;
+        object-fit: cover;
+      }
+      .why-stat-card::after {
+        content: '';
+        position: absolute; inset: 0;
+        background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.15) 50%, rgba(0,0,0,0.05) 100%);
+      }
+      .why-stat-card .stat-text {
+        position: relative; z-index: 2;
+        padding: 32px;
+      }
+      .why-stat-card .num {
+        font-size: clamp(48px, 5vw, 68px);
+        font-weight: 700; color: #ffffff;
+        letter-spacing: -0.03em; line-height: 1;
+      }
+      .why-stat-card .label {
+        font-size: 20px; font-weight: 600;
+        color: #ffffff;
+        margin-top: 6px;
+      }
+      .why-stat-card .desc {
+        font-size: 14px;
+        color: #ffffff;
+        margin-top: 6px;
+        font-weight: 400; line-height: 1.7;
+      }
+
+      .benefits-box {
+        position: relative;
+        border-radius: 20px;
+        padding: 32px 40px;
+        margin-bottom: 12px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      .benefits-list {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 56px;
+      }
+      .benefit-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #0a0a0a;
+        line-height: 1.4;
+      }
+      .benefit-item span { font-weight: 400; }
+
+      .benefit-item .b-icon {
+        width: 36px; height: 36px;
+        flex-shrink: 0;
+        display: flex; align-items: center; justify-content: center;
+        background: rgba(0,0,0,0.06);
+        border-radius: 10px;
+      }
+      .benefit-item .b-icon svg {
+        width: 18px; height: 18px;
+        stroke: #0a0a0a; fill: none;
+        stroke-width: 1.5;
+        stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      .partner-strip {
+        display: flex;
+        align-items: center;
+        gap: 40px;
+        justify-content: center;
+        padding: 0;
+      }
+      .partner-strip span {
+        font-size: 20px; font-weight: 600;
+        color: #ffffff;
+        white-space: nowrap;
+      }
+      .partner-strip img {
+        height: 56px;
+        width: auto;
+        opacity: 0.55;
+        filter: brightness(10);
+      }
+      .partner-strip img[alt="VT Markets"] {
+        height: 120px;
+      }
+
+      /* ─────────────────────── 8. CLOSING CTA ─────────────────────── */
+      .closing-cta {
+        padding: 55px 0;
+        background: #0c1210;
+      }
+      .cta-strip {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 40px;
+        border-radius: 24px;
+        padding: 40px 48px;
+        overflow: hidden;
+        position: relative;
+        background: url('public/13.jpg') center/cover no-repeat;
+      }
+      .cta-strip-text {
+        font-size: clamp(22px, 2.2vw, 30px);
+        font-weight: 400;
+        letter-spacing: -0.03em;
+        color: #000;
+        line-height: 1.25;
+        max-width: 380px;
+        flex-shrink: 0;
+      }
+      .cta-pills {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .cta-pill {
+        background: #000;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        padding: 10px 24px;
+        border-radius: 999px;
+        white-space: nowrap;
+      }
+
+      /* ─────────────────────── FOOTER ─────────────────────── */
+      footer {
+        background: #0a0a0a;
+        padding: 60px 0 40px;
+        text-align: center;
+      }
+
+      .footer-inner {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 32px;
+      }
+
+      .footer-logo {
+        font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+        text-transform: lowercase; color: #ffffff; display: block; margin-bottom: 8px;
+      }
+
+      .footer-tagline {
+        font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 400; line-height: 1.5;
+      }
+
+      .footer-nav {
+        display: flex; flex-direction: column; gap: 14px; align-items: center;
+      }
+
+      .footer-nav-row {
+        display: flex; gap: 28px; align-items: center;
+        flex-wrap: wrap; justify-content: center;
+      }
+
+      .footer-nav-row a {
+        font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 400;
+        transition: color 150ms;
+      }
+      .footer-nav-row a:hover { color: #ffffff; }
+
+      .footer-book-call {
+        display: inline-flex; align-items: center;
+        font-size: 13px; font-weight: 600; color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.22); border-radius: 999px;
+        padding: 6px 18px; transition: border-color 150ms, background 150ms;
+      }
+      .footer-book-call:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+
+      .footer-subscribe {
+        display: flex; flex-direction: column; align-items: center; gap: 12px;
+      }
+
+      .footer-subscribe-label {
+        font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.45);
+      }
+
+      .footer-email-form {
+        display: flex; align-items: center;
+        border-radius: 999px; background: #ffffff;
+        padding: 4px 4px 4px 20px; width: 320px; max-width: 100%;
+      }
+      .footer-email-form input {
+        flex: 1; background: none; border: none; outline: none;
+        color: #0a0a0a; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif;
+        padding: 10px 0;
+      }
+      .footer-email-form input::placeholder { color: rgba(0,0,0,0.35); }
+      .footer-email-form button {
+        width: 36px; height: 36px; border-radius: 50%;
+        border: none; background: #0a0a0a; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; transition: opacity 200ms;
+      }
+      .footer-email-form button:hover { opacity: 0.7; }
+      .footer-email-form button svg {
+        width: 15px; height: 15px; fill: none;
+        stroke: #ffffff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      .footer-socials {
+        display: flex; gap: 10px; justify-content: center;
+      }
+      .footer-socials a {
+        width: 44px; height: 44px; border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.15);
+        display: flex; align-items: center; justify-content: center;
+        transition: border-color 150ms, background 150ms;
+      }
+      .footer-socials a:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
+      .footer-socials a svg {
+        width: 16px; height: 16px; fill: none; stroke: #ffffff;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      .footer-copy {
+        display: flex; gap: 12px; align-items: center; justify-content: center;
+        flex-wrap: wrap;
+        font-size: 12px; color: rgba(255,255,255,0.25);
+        padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+        width: 100%;
+      }
+      .footer-copy a {
+        font-size: 12px; color: rgba(255,255,255,0.35); font-weight: 400;
+        transition: color 150ms;
+      }
+      .footer-copy a:hover { color: rgba(255,255,255,0.7); }
+
+      /* ─────────────────────── RESPONSIVE ─────────────────────── */
+      @media (max-width: 1024px) {
+        .wrap { padding-inline: 32px; }
+        .nav-inner { padding-inline: 32px; }
+        .mgmt-grid { grid-template-columns: 1fr; }
+        .mgmt-photo { min-height: 300px; }
+        .sub-cards { grid-template-columns: 1fr 1fr; }
+        .steps-grid { grid-template-columns: 1fr; }
+        .creators-grid { columns: 2; }
+        .why-stats { grid-template-columns: 1fr; }
+        .benefits-list { grid-template-columns: 1fr; }
+        .cta-strip { flex-direction: column; align-items: flex-start; padding: 32px; }
+        .testimonial-grid { grid-template-columns: 1fr; }
+        .case-studies .section-top { flex-direction: column; gap: 16px; align-items: flex-start; }
+        .our-creators .section-head { flex-direction: column !important; gap: 16px; align-items: flex-start !important; }
+        .case-card { flex: 0 0 calc((100vw - 64px - 20px) / 2); min-width: 280px; }
+        .cap-track { padding: 0 32px; }
+        .case-carousel { padding: 0 32px; }
+      }
+
+      /* Hamburger */
+      .nav-toggle {
+        display: none;
+        background: none; border: none; cursor: pointer;
+        width: 28px; height: 20px;
+        position: relative; z-index: 101;
+      }
+      .nav-toggle span {
+        display: block; width: 100%; height: 2px;
+        background: #fff; border-radius: 2px;
+        transition: all 250ms;
+      }
+      .nav-toggle span:nth-child(2) { margin: 6px 0; }
+      .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+      .nav-toggle.active span:nth-child(2) { opacity: 0; }
+      .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+      @media (max-width: 680px) {
+        .wrap { padding-inline: 20px; }
+        .nav-inner { padding-inline: 20px; }
+
+        .nav-toggle { display: flex; flex-direction: column; justify-content: center; }
+
+        .nav-links {
+          display: none;
+          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.95);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          flex-direction: column;
+          align-items: center; justify-content: center;
+          gap: 12px;
+          z-index: 100;
+        }
+        .nav-links.open { display: flex; }
+        .nav-links a { font-size: 20px; padding: 12px 28px; }
+
+        .hero h1 { font-size: clamp(28px, 8vw, 44px); white-space: normal; }
+        .hero h1 .hero-break { display: block; }
+        .hero p { font-size: 16px; }
+
+        .cap-card { flex: 0 0 260px; min-height: 360px; }
+        .cap-track { padding: 0; }
+        .cap-header { flex-direction: column; gap: 16px; align-items: center; text-align: center; }
+        .cap-header-left { text-align: center; }
+        .btn--cap { padding: 8px 16px !important; font-size: 12px !important; }
+
+        .represent-grid { grid-template-columns: 1fr; gap: 32px; }
+        .sub-cards { grid-template-columns: 1fr 1fr; gap: 10px; }
+        .sub-card { padding: 16px 12px 18px; }
+        .sub-card .sub-icon { width: 36px; height: 36px; margin-bottom: 10px; }
+        .sub-card h4 { font-size: 16px; margin-bottom: 6px; }
+        .sub-card p { font-size: 11px; }
+
+        .steps-grid { grid-template-columns: 1fr; }
+        .step-card { min-height: 220px; padding: 28px 24px; }
+
+        /* ── Desktop/mobile button toggle ── */
+        .btn-section-desktop { display: none !important; }
+        .btn-section-mobile { display: block !important; text-align: center; margin-top: 32px; }
+
+        /* ── Match all section subtext to hero p size ── */
+        .cap-header-left p,
+        .case-studies .section-top p,
+        .our-creators .section-head p,
+        .why-finluence .section-head p,
+        .how-it-works .section-head p { font-size: 16px !important; }
+
+        /* ── Centre all section text & buttons ── */
+        .section-head,
+        .section-top,
+        .how-it-works .section-head,
+        .why-finluence .section-head { text-align: center !important; align-items: center !important; }
+
+        .section-head h2, .section-top h2,
+        .section-head p, .section-top p { text-align: center; }
+
+        .case-studies .section-top { flex-direction: column; gap: 16px; align-items: center !important; }
+        .our-creators .section-head { flex-direction: column !important; gap: 16px; align-items: center !important; }
+
+        .mgmt-info { text-align: center; align-items: center; }
+        .stats-bar { justify-content: center; }
+        .stat { text-align: center; }
+
+        .cta-strip { align-items: center !important; text-align: center; }
+        .cta-strip-text { text-align: center; }
+        .cta-pills { justify-content: center; }
+
+        .case-card { flex: 0 0 calc(100vw - 80px); height: 320px; }
+        .cap-track { padding: 0 20px; }
+        .case-carousel { padding: 0 20px; }
+        .creators-grid { columns: 1; }
+        .creator-card .creator-img { height: 320px !important; }
+
+        .why-stats { grid-template-columns: 1fr; }
+        .why-stat-card { min-height: 240px; }
+        .benefits-box { padding: 24px 20px; }
+        .benefits-list { grid-template-columns: 1fr; gap: 16px; }
+        .benefit-item { font-size: 13px; }
+
+        .partner-strip { flex-wrap: wrap; gap: 0 20px; padding-top: 0; margin-top: 24px; }
+        .partner-strip span { width: 100%; text-align: center; margin-bottom: 4px; font-size: 13px; }
+        .partner-strip img { height: 32px; }
+        .partner-strip img[alt="VT Markets"] { height: 64px; }
+
+        .cta-strip { flex-direction: column; align-items: flex-start; padding: 24px 20px; gap: 24px; }
+        .cta-strip-text { font-size: 20px; }
+        .cta-pill { font-size: 13px; padding: 8px 18px; }
+
+        .capabilities, .represent, .how-it-works, .our-creators,
+        .case-studies, .why-finluence, .closing-cta { padding: 48px 0; }
+
+        .footer-email-form { width: 100%; }
+      }
+
+      /* ── CASE STUDY OVERLAY ── */
+      .cs-overlay {
+        display: none;
+        position: fixed; inset: 0; z-index: 9000;
+        background: rgba(0,0,0,0.9);
+        align-items: center; justify-content: center;
+        padding: 24px;
+        opacity: 0;
+        transition: opacity 220ms ease;
+      }
+      .cs-overlay.open { display: flex; }
+      .cs-overlay.visible { opacity: 1; }
+      .cs-modal {
+        display: flex;
+        width: 100%; max-width: 1100px;
+        max-height: 90vh;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #0a0a0a;
+        box-shadow: 0 0 0 1px rgba(255,255,255,0.06);
+        position: relative;
+        transform: scale(0.97);
+        transition: transform 220ms ease;
+      }
+      .cs-overlay.visible .cs-modal {
+        transform: scale(1);
+      }
+      .cs-close {
+        position: absolute; top: 16px; right: 16px; z-index: 10;
+        width: 32px; height: 32px; border-radius: 50%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.15);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; color: #fff; font-weight: 300; line-height: 1;
+        cursor: pointer; transition: background 160ms;
+      }
+      .cs-close:hover { background: rgba(255,255,255,0.15); }
+      .cs-img {
+        width: 55%; flex-shrink: 0;
+        min-height: 500px;
+        background-size: cover; background-position: center;
+      }
+      .cs-content {
+        flex: 1; padding: 40px 36px;
+        overflow: hidden; color: rgba(255,255,255,0.75);
+        display: flex; flex-direction: column; gap: 24px;
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      }
+      .cs-body { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.75; overflow-y: auto; flex: 1; }
+      .cs-body::-webkit-scrollbar { width: 4px; }
+      .cs-body::-webkit-scrollbar-track { background: transparent; }
+      .cs-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+      .cs-title {
+        font-size: clamp(20px, 2.4vw, 28px); font-weight: 600;
+        letter-spacing: -0.03em; color: #fff; line-height: 1.15;
+      }
+      .cs-meta { display: flex; flex-direction: column; border-top: 1px solid rgba(255,255,255,0.07); }
+      .cs-meta-row {
+        display: flex; gap: 16px; padding: 11px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07); align-items: baseline;
+      }
+      .cs-meta-label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.35); min-width: 80px; flex-shrink: 0; }
+      .cs-meta-value { font-size: 13px; font-weight: 600; color: #fff; }
+      .cs-body p + p { margin-top: 12px; }
+      @media(max-width:640px) {
+        .cs-overlay { padding: 0; align-items: flex-end; }
+        .cs-modal {
+          flex-direction: column; height: 88vh; max-height: 88vh;
+          border-radius: 20px 20px 0 0; max-width: 100%;
+          transform: translateY(30px);
+        }
+        .cs-overlay.visible .cs-modal { transform: translateY(0); }
+        .cs-img { width: 100%; height: 220px; min-height: 220px; flex-shrink: 0; }
+        .cs-content { padding: 28px 24px 36px; flex: 1; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="nav-inner">
+        <a class="logo" href="index.html">finluence</a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="creators.html">Creators</a>
+          <a href="#">Brokers</a>
+          <a href="#">Network</a>
+          <a href="#">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+
+      <!-- 1. HERO -->
+      <section class="hero">
+        <video autoplay muted loop playsinline src="public/hero-gushcloud.mp4"></video>
+        <div class="hero-content">
+          <h1>Built for <span class="hero-break">serious creators.</span></h1>
+          <p>Trading's biggest creators started here.</p>
+          <a class="btn btn--purple" href="#apply" style="margin-top: 24px; padding: 14px 36px; font-size: 15px;">Let's Partner</a>
+        </div>
+      </section>
+
+      <!-- 2. CAPABILITIES -->
+      <section class="capabilities">
+        <div class="wrap">
+          <div class="cap-header">
+            <div class="cap-header-left">
+              <h2>What We Do</h2>
+              <p>Everything a trading creator needs, in one place.</p>
+            </div>
+            <a class="btn btn--purple btn-section-desktop" href="#apply" style="padding: 14px 36px; font-size: 15px; flex-shrink: 0; align-self: flex-start;">Partner With Us</a>
+          </div>
+        </div>
+        <div class="cap-track-wrapper">
+          <button class="carousel-arrow prev cap-prev" aria-label="Previous">&#8249;</button>
+          <button class="carousel-arrow next cap-next" aria-label="Next">&#8250;</button>
+          <div class="cap-track">
+            <div class="cap-card">
+              <div class="cap-img" style="background-image:url('public/creators/contentandpublishing.jpeg'); background-position: center center;"></div>
+              <div class="cap-scrim"></div>
+              <div class="cap-content">
+                <h3>Content &amp; Publishing</h3>
+                <p class="cap-desc">From content strategy to scheduling and distribution, we build the full publishing system around your channel — so you stay consistent across YouTube, TikTok and Instagram without losing creative momentum.</p>
+              </div>
+            </div>
+            <div class="cap-card">
+              <div class="cap-img" style="background-image:url('public/creators/event-apperances.png'); background-position: center center;"></div>
+              <div class="cap-scrim"></div>
+              <div class="cap-content">
+                <h3>Events &amp; Appearances</h3>
+                <p class="cap-desc">We place our creators at the industry's most important moments — from trading expos in Dubai to creator summits in London. The right room, the right audience, the right introduction.</p>
+              </div>
+            </div>
+            <div class="cap-card">
+              <div class="cap-img" style="background-image:url('public/creators/deal-manage.png'); background-position: center center;"></div>
+              <div class="cap-scrim"></div>
+              <div class="cap-content">
+                <h3>Deal Management</h3>
+                <p class="cap-desc">We handle every stage of the deal — contracts, negotiations, deliverables and payments — so you never have to chase a brand or navigate a contract alone. We protect you and make sure every deal runs on your terms.</p>
+              </div>
+            </div>
+            <div class="cap-card">
+              <div class="cap-img" style="background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=800&fit=crop')"></div>
+              <div class="cap-scrim"></div>
+              <div class="cap-content">
+                <h3>Audience Growth</h3>
+                <p class="cap-desc">We build growth strategies specifically for finance and trading audiences — cross-platform distribution, community building and monetisation frameworks that turn followers into a compounding, long-term asset.</p>
+              </div>
+            </div>
+            <div class="cap-card">
+              <div class="cap-img" style="background-image:url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=600&h=800&fit=crop')"></div>
+              <div class="cap-scrim"></div>
+              <div class="cap-content">
+                <h3>Brand Representation</h3>
+                <p class="cap-desc">We connect you directly with the world's leading trading brokers and brands — negotiating deals, managing relationships and making sure every partnership is built around your audience, not just your numbers.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="btn-section-mobile wrap">
+          <a class="btn btn--purple" href="#apply" style="padding: 14px 36px; font-size: 15px;">Partner With Us</a>
+        </div>
+      </section>
+
+      <!-- 3. WE REPRESENT YOU -->
+      <section class="represent">
+        <div class="wrap">
+          <div class="mgmt-grid">
+
+            <div class="mgmt-photo">
+              <div class="bg"></div>
+              <div class="scrim"></div>
+              <div class="inner">
+                <div>
+                  <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #ffffff; display: block; margin-bottom: 8px;">CREATOR MONETIZATION</span>
+                  <h3>We represent you.</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="mgmt-info">
+              <div class="magic-text" data-magic-text>We manage and represent trading creators — securing brand deals, expanding into new markets, and building long-term value. We negotiate, strategize and unlock new opportunities with you.</div>
+              <div class="stats-bar">
+                <div class="stat">
+                  <div class="num">35+</div>
+                  <div class="lbl">Trading Creators</div>
+                </div>
+                <div class="stat">
+                  <div class="num">27+</div>
+                  <div class="lbl">Countries Covered</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="sub-cards">
+              <div class="sub-card">
+                <div class="sub-icon"><svg viewBox="0 0 24 24"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg></div>
+                <h4>Brand Deals &amp; Partnerships</h4>
+                <p>Direct access to the world's leading trading brokers and brands.</p>
+              </div>
+              <div class="sub-card">
+                <div class="sub-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                <h4>Global Market Access</h4>
+                <p>We open doors in markets across Europe, the Middle East and Asia.</p>
+              </div>
+              <div class="sub-card">
+                <div class="sub-icon"><svg viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
+                <h4>Predictable Content Strategy</h4>
+                <p>A clear, consistent content plan built around your audience and goals.</p>
+              </div>
+              <div class="sub-card">
+                <div class="sub-icon"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <h4>Full Management<br>&amp; Support</h4>
+                <p>We handle the business side so you can focus on what you do best.</p>
+              </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. CASE STUDIES -->
+      <section class="case-studies">
+        <div class="wrap">
+          <div class="section-top">
+            <div>
+              <h2>Creator Case Studies</h2>
+              <p>From audience to income — here's how we did it.</p>
+            </div>
+            <a class="btn btn--purple btn-section-desktop" href="#apply" style="padding: 14px 36px; font-size: 15px; flex-shrink: 0; align-self: flex-start;">Partner With Us</a>
+          </div>
+        </div>
+        <div class="case-carousel-wrap">
+          <button class="carousel-arrow prev" onclick="var c=document.querySelector('.case-carousel'),s=c.querySelector('.case-card');c.scrollBy({left:-(s.offsetWidth+20),behavior:'smooth'})">&#8249;</button>
+          <button class="carousel-arrow next" onclick="var c=document.querySelector('.case-carousel'),s=c.querySelector('.case-card');c.scrollBy({left:s.offsetWidth+20,behavior:'smooth'})">&#8250;</button>
+          <div class="case-carousel">
+          <div class="case-card" onclick="openCase('cs-dovy')" style="cursor:pointer;">
+            <div class="case-img" style="background: url('public/creators/boaching-empire.jpg') center / cover no-repeat; width:100%; height:100%;"></div>
+            <div class="case-scrim"></div>
+            <div class="case-info">
+              <div class="case-tag">Monetization &amp; Branding</div>
+              <div class="case-title">Building a Coaching Empire from Scratch</div>
+            </div>
+          </div>
+          <div class="case-card" onclick="openCase('cs-fxd')" style="cursor:pointer;">
+            <div class="case-img" style="background: url('public/creators/followers-into-business.png') center / cover no-repeat; width:100%; height:100%;"></div>
+            <div class="case-scrim"></div>
+            <div class="case-info">
+              <div class="case-tag">Brand Partnership &amp; Growth</div>
+              <div class="case-title">Turning a Following into a Business</div>
+            </div>
+          </div>
+          <div class="case-card" onclick="openCase('cs-smith')" style="cursor:pointer;">
+            <div class="case-img" style="background: url('public/creators/zero-to-7000.jpeg') center / cover no-repeat; width:100%; height:100%;"></div>
+            <div class="case-scrim"></div>
+            <div class="case-info">
+              <div class="case-tag">TikTok &amp; Community Growth</div>
+              <div class="case-title">From Zero to 7,000 in 30 Days</div>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="btn-section-mobile wrap">
+          <a class="btn btn--purple" href="#apply" style="padding: 14px 36px; font-size: 15px;">Partner With Us</a>
+        </div>
+      </section>
+
+      <!-- 6. OUR CREATORS -->
+      <section class="our-creators">
+        <div class="wrap">
+          <div class="section-head">
+            <div>
+              <h2>Our Select Creators</h2>
+              <p>Hand-picked creators. 27+ countries. One network.</p>
+            </div>
+            <a class="btn btn--dark btn-section-desktop" href="#apply" style="padding: 14px 36px; font-size: 15px; flex-shrink: 0; align-self: flex-start;">Partner With Us</a>
+          </div>
+          <div class="creators-grid">
+            <div class="creator-card">
+              <img class="creator-img" src="public/creators/1.png" alt="" />
+              <span class="tag">Affiliate</span>
+              <div class="info">
+                <strong>ADK Trades</strong>
+                <img class="flag" src="https://flagcdn.com/w40/gb.png" alt="" />
+              </div>
+            </div>
+            <div class="creator-card">
+              <img class="creator-img" src="public/creators/2.png" alt="" />
+              <span class="tag">Affiliate</span>
+              <div class="info">
+                <strong>Trecation</strong>
+                <img class="flag" src="https://flagcdn.com/w40/us.png" alt="" />
+              </div>
+            </div>
+            <div class="creator-card">
+              <img class="creator-img" src="public/creators/3.png" alt="" />
+              <span class="tag">Educator</span>
+              <div class="info">
+                <strong>FXDSniper</strong>
+                <img class="flag" src="https://flagcdn.com/w40/de.png" alt="" />
+              </div>
+            </div>
+            <div class="creator-card">
+              <img class="creator-img" src="public/creators/4.png" alt="" />
+              <span class="tag">Educator</span>
+              <div class="info">
+                <strong>Smith Trades</strong>
+                <img class="flag" src="https://flagcdn.com/w40/gb.png" alt="" />
+              </div>
+            </div>
+            <div class="creator-card">
+              <img class="creator-img" src="public/creators/5.png" alt="" />
+              <span class="tag">Educator</span>
+              <div class="info">
+                <strong>DovyFX</strong>
+                <img class="flag" src="https://flagcdn.com/w40/nl.png" alt="" />
+              </div>
+            </div>
+            <a href="#apply" class="creator-card creator-card--cta">
+              <img class="creator-img" src="public/creators/silhouette.png" alt="" />
+              <div class="info">
+                <strong>Could be you.</strong>
+                <span class="cta-apply">Apply Now →</span>
+              </div>
+            </a>
+          </div>
+          <div class="btn-section-mobile" style="text-align: center; margin-top: 32px;">
+            <a class="btn btn--dark" href="#apply" style="padding: 14px 36px; font-size: 15px;">Partner With Us</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. WHY FINLUENCE -->
+      <section class="why-finluence">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>Why Partner with Finluence?</h2>
+            <p>A decade building the world's most connected trading media network.</p>
+          </div>
+          <div class="why-stats">
+            <div class="why-stat-card">
+              <img src="public/stat-views.jpeg" alt="Finluence creators" />
+              <div class="stat-text">
+                <div class="num">500M+</div>
+                <div class="label">Views Generated</div>
+                <div class="desc">across YouTube, TikTok, Instagram</div>
+              </div>
+            </div>
+            <div class="why-stat-card">
+              <img src="public/stat-revenue.jpeg" alt="Finluence team" />
+              <div class="stat-text">
+                <div class="num">$100M+</div>
+                <div class="label">Partnership Revenue</div>
+                <div class="desc">across 23+ countries since 2016</div>
+              </div>
+            </div>
+          </div>
+          <div class="benefits-box">
+            <div class="benefits-list">
+              <div class="benefit-item">
+                <div class="b-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                <span>Access to the worlds top trading brokers</span>
+              </div>
+              <div class="benefit-item">
+                <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <span>Event invitations across Europe, Middle East &amp; Asia</span>
+              </div>
+              <div class="benefit-item">
+                <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></div>
+                <span>Content strategy and publishing support</span>
+              </div>
+              <div class="benefit-item">
+                <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <span>Deal negotiation and career management</span>
+              </div>
+              <div class="benefit-item">
+                <div class="b-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+                <span>Global audience growth across all platforms</span>
+              </div>
+              <div class="benefit-item">
+                <div class="b-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <span>Long-term representation, not one-off deals</span>
+              </div>
+            </div>
+          </div>
+          <div class="partner-strip">
+            <span>Exclusive Partnerships with:</span>
+            <img src="public/AxiNew.png" alt="Axi" />
+            <img src="public/PUPrimeNew.png" alt="PU Prime" />
+            <img src="public/VantageNew.png" alt="Vantage" />
+            <img src="public/vtmarkets-removebg-preview.png" alt="VT Markets" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. CLOSING CTA -->
+      <section class="closing-cta" id="apply">
+        <div class="wrap">
+          <div class="cta-strip">
+            <div class="cta-strip-text">Join a trusted network of experts and builders shaping creators in:</div>
+            <div class="cta-pills">
+              <span class="cta-pill">Forex</span>
+              <span class="cta-pill">Crypto</span>
+              <span class="cta-pill">Fintech</span>
+              <span class="cta-pill">Commodities</span>
+              <span class="cta-pill">Web3</span>
+              <span class="cta-pill">Affiliation</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="wrap">
+        <div class="footer-inner">
+
+          <!-- Row 1: Logo + tagline -->
+          <div>
+            <span class="footer-logo">finluence</span>
+            <p class="footer-tagline">Media for the trading world.</p>
+          </div>
+
+          <!-- Row 2: Newsletter -->
+          <div class="footer-subscribe">
+            <form class="footer-email-form" onsubmit="return false;">
+              <input type="email" placeholder="Your email address" />
+              <button type="submit" aria-label="Subscribe">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- Row 3: Socials -->
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </a>
+            <a href="#" aria-label="X">
+              <svg viewBox="0 0 24 24"><path d="M4 4l6.5 8L4 20h2l5.5-6.5L16 20h4l-6.5-8L20 4h-2l-5.5 6.5L8 4H4z" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <!-- Row 4: Legal links -->
+          <div class="footer-copy">
+            <a href="#">About Us</a>
+            <span>·</span>
+            <a href="mailto:hello@finluence.com">Contact Us</a>
+            <span>·</span>
+            <a href="#">Terms &amp; Conditions</a>
+            <span>·</span>
+            <a href="#">Privacy Policy</a>
+            <span>·</span>
+            <a href="#">Cookies Policy</a>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector('.nav-toggle');
+      const links = document.querySelector('.nav-links');
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          toggle.classList.remove('active');
+          links.classList.remove('open');
+        });
+      });
+
+      // Capabilities carousel arrows
+      const track = document.querySelector('.cap-track');
+      const prevBtn = document.querySelector('.cap-prev');
+      const nextBtn = document.querySelector('.cap-next');
+      if (track && prevBtn && nextBtn) {
+        const getStep = () => {
+          const card = track.querySelector('.cap-card');
+          return card ? card.offsetWidth + 20 : 400;
+        };
+        prevBtn.addEventListener('click', () => {
+          track.scrollBy({ left: -getStep(), behavior: 'smooth' });
+        });
+        nextBtn.addEventListener('click', () => {
+          track.scrollBy({ left: getStep(), behavior: 'smooth' });
+        });
+      }
+
+      // Cap-card click to reveal description
+      document.querySelectorAll('.cap-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const isActive = card.classList.contains('active');
+          document.querySelectorAll('.cap-card').forEach(c => c.classList.remove('active'));
+          if (!isActive) card.classList.add('active');
+        });
+      });
+
+    </script>
+
+    <script>
+      // Magic text scroll reveal
+      document.querySelectorAll('[data-magic-text]').forEach(container => {
+        const text = container.textContent.trim();
+        container.textContent = '';
+        const words = text.split(' ');
+
+        words.forEach(word => {
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.innerHTML = `<span class="ghost">${word}</span><span class="reveal">${word}</span>`;
+          container.appendChild(span);
+        });
+
+        const revealWords = () => {
+          const rect = container.getBoundingClientRect();
+          const start = window.innerHeight * 0.9;
+          const end = window.innerHeight * 0.25;
+          const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+
+          const wordEls = container.querySelectorAll('.word .reveal');
+          wordEls.forEach((el, i) => {
+            const wordStart = i / wordEls.length;
+            const wordEnd = wordStart + 1 / wordEls.length;
+            const wordProgress = Math.min(1, Math.max(0, (progress - wordStart) / (wordEnd - wordStart)));
+            el.style.opacity = wordProgress;
+          });
+        };
+
+        window.addEventListener('scroll', revealWords, { passive: true });
+        revealWords();
+      });
+    </script>
+
+    <!-- ── CASE STUDY OVERLAYS ── -->
+
+    <!-- DovyFX -->
+    <div id="cs-dovy" class="cs-overlay" onclick="if(event.target===this)closeCase()">
+      <div class="cs-modal">
+        <button class="cs-close" onclick="closeCase()">&#x2715;</button>
+        <div class="cs-img" style="background-image:url('public/creators/boaching-empire.jpg')"></div>
+        <div class="cs-content">
+          <h2 class="cs-title">DovyFX — Full Brand &amp; Monetization Build</h2>
+          <div class="cs-meta">
+            <div class="cs-meta-row"><span class="cs-meta-label">Format</span><span class="cs-meta-value">Coaching &amp; Monetization</span></div>
+            <div class="cs-meta-row"><span class="cs-meta-label">Result</span><span class="cs-meta-value">$130K+ in 60 days</span></div>
+            <div class="cs-meta-row"><span class="cs-meta-label">Country</span><span class="cs-meta-value">Lithuania</span></div>
+          </div>
+          <div class="cs-body">
+            <p>Dovy had built one of the most credible and engaged audiences in the European trading space — but had no way to monetize it. No coaching product, no sales funnel, no brand identity, no system to convert his audience into income.</p>
+            <p>We built his entire brand from the ground up: visual identity, high-ticket coaching product, sales funnels, community platform, and automated student onboarding — all delivered in a focused 60-day sprint.</p>
+            <p>The result was $130K+ in revenue within the first 60 days of launch. Not from a viral moment — from the systems we built together.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FXDSniper -->
+    <div id="cs-fxd" class="cs-overlay" onclick="if(event.target===this)closeCase()">
+      <div class="cs-modal">
+        <button class="cs-close" onclick="closeCase()">&#x2715;</button>
+        <div class="cs-img" style="background-image:url('public/creators/followers-into-business.png')"></div>
+        <div class="cs-content">
+          <h2 class="cs-title">FXDSniper — Turning a Following into a Business</h2>
+          <div class="cs-meta">
+            <div class="cs-meta-row"><span class="cs-meta-label">Format</span><span class="cs-meta-value">Broker &amp; Brand Monetization</span></div>
+            <div class="cs-meta-row"><span class="cs-meta-label">Result</span><span class="cs-meta-value">$30K+ in first month</span></div>
+            <div class="cs-meta-row"><span class="cs-meta-label">Country</span><span class="cs-meta-value">Poland</span></div>
+          </div>
+          <div class="cs-body">
+            <p>FXDSniper had built a large, engaged audience that genuinely trusted his trading content. The views were there, the comments were there, the community engagement was there — but the income wasn't.</p>
+            <p>He was making $3,000 a month — wildly disconnected from both the size of his audience and the value he was delivering. We took a four-pronged approach: connect FXD with the right broker and brand partners, build out his content strategy, create a proper community structure, and install an onboarding system to handle broker referrals at scale.</p>
+            <p>Within the first month, his monthly revenue jumped from $3K to over $30K. He is now actively working towards $100K per month — and the systems are in place to get there.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Smith Trading -->
+    <div id="cs-smith" class="cs-overlay" onclick="if(event.target===this)closeCase()">
+      <div class="cs-modal">
+        <button class="cs-close" onclick="closeCase()">&#x2715;</button>
+        <div class="cs-img" style="background-image:url('public/creators/zero-to-7000.jpeg')"></div>
+        <div class="cs-content">
+          <h2 class="cs-title">Smith Trading — From Zero to 7,000 in 30 Days</h2>
+          <div class="cs-meta">
+            <div class="cs-meta-row"><span class="cs-meta-label">Format</span><span class="cs-meta-value">TikTok Live &amp; Community Strategy</span></div>
+            <div class="cs-meta-row"><span class="cs-meta-label">Result</span><span class="cs-meta-value">$30K/month</span></div>
+            <div class="cs-meta-row"><span class="cs-meta-label">Country</span><span class="cs-meta-value">United Kingdom</span></div>
+          </div>
+          <div class="cs-body">
+            <p>Smith was the kind of creator you don't come across often — a natural on camera, genuinely knowledgeable, with real charisma that translated directly to screen. He was crossing from crypto into FX and commodities, building an audience as he went.</p>
+            <p>But natural talent without strategy only gets you so far. He had no structured TikTok Live approach, no community, and no monetization path. We worked across four areas simultaneously — his live strategy, broker monetization, community build, and cross-platform growth. Each piece designed to reinforce the others.</p>
+            <p>Within 30 days, his community had 7,000 members, his TikTok Lives were pulling 500+ average viewers, and monthly revenue hit $30K. Smith's natural talent was the engine — our infrastructure was the fuel system.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function openCase(id) {
+        var el = document.getElementById(id);
+        el.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function(){
+          requestAnimationFrame(function(){ el.classList.add('visible'); });
+        });
+      }
+      function closeCase() {
+        document.querySelectorAll('.cs-overlay.open').forEach(function(el){
+          el.classList.remove('visible');
+          setTimeout(function(){ el.classList.remove('open'); }, 240);
+        });
+        document.body.style.overflow = '';
+      }
+      document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeCase(); });
+    </script>
+
+  </body>
+</html>

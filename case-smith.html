@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Smith Trading — Case Study | Finluence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700&display=swap" rel="stylesheet" />
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+      html,body{height:100%;}
+      body {
+        background: #060a09;
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-size: 15px; line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        display: flex; align-items: center; justify-content: center;
+        min-height: 100vh; padding: 24px;
+      }
+      a { color: inherit; text-decoration: none; }
+
+      /* ── MODAL ── */
+      .modal {
+        display: flex;
+        width: 100%; max-width: 860px;
+        max-height: 90vh;
+        border-radius: 20px;
+        overflow: hidden;
+        background: #0e1412;
+        box-shadow: 0 32px 80px rgba(0,0,0,0.8), 0 0 0 1px rgba(255,255,255,0.06);
+        position: relative;
+      }
+
+      /* ── CLOSE ── */
+      .close-btn {
+        position: absolute; top: 16px; right: 16px; z-index: 10;
+        width: 32px; height: 32px; border-radius: 50%;
+        background: rgba(0,0,0,0.5);
+        backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
+        border: 1px solid rgba(255,255,255,0.15);
+        display: flex; align-items: center; justify-content: center;
+        font-size: 15px; color: #fff; font-weight: 300; line-height: 1;
+        cursor: pointer; transition: background 160ms;
+      }
+      .close-btn:hover { background: rgba(255,255,255,0.15); }
+
+      /* ── IMAGE PANEL ── */
+      .modal-image {
+        width: 46%; flex-shrink: 0;
+        background: url('public/case-zero-to-7k.jpg') center / cover no-repeat;
+        min-height: 500px;
+      }
+
+      /* ── CONTENT PANEL ── */
+      .modal-content {
+        flex: 1; padding: 40px 36px;
+        overflow-y: auto; color: rgba(255,255,255,0.75);
+        display: flex; flex-direction: column; gap: 24px;
+      }
+      .modal-content::-webkit-scrollbar { width: 4px; }
+      .modal-content::-webkit-scrollbar-track { background: transparent; }
+      .modal-content::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+
+      .modal-title {
+        font-size: clamp(20px, 2.4vw, 28px); font-weight: 600;
+        letter-spacing: -0.03em; color: #fff; line-height: 1.15;
+      }
+
+      /* ── KEY-VALUE ROWS ── */
+      .modal-meta {
+        display: flex; flex-direction: column; gap: 0;
+        border-top: 1px solid rgba(255,255,255,0.07);
+      }
+      .meta-row {
+        display: flex; gap: 16px;
+        padding: 11px 0;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        align-items: baseline;
+      }
+      .meta-label {
+        font-size: 12px; font-weight: 500;
+        color: rgba(255,255,255,0.35); min-width: 80px; flex-shrink: 0;
+      }
+      .meta-value {
+        font-size: 13px; font-weight: 600; color: #fff;
+      }
+
+      /* ── BODY TEXT ── */
+      .modal-body {
+        font-size: 14px; color: rgba(255,255,255,0.6);
+        line-height: 1.75;
+      }
+      .modal-body p + p { margin-top: 12px; }
+
+      /* ── MOBILE ── */
+      @media(max-width:640px) {
+        body { padding: 0; align-items: flex-end; }
+        .modal {
+          flex-direction: column; max-height: 95vh;
+          border-radius: 20px 20px 0 0; max-width: 100%;
+        }
+        .modal-image { width: 100%; min-height: 220px; }
+        .modal-content { padding: 28px 24px 36px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <div class="modal">
+      <a class="close-btn" href="creators.html" aria-label="Close">&#x2715;</a>
+      <div class="modal-image"></div>
+      <div class="modal-content">
+        <h1 class="modal-title">Smith Trading — From Zero to 7,000 in 30 Days</h1>
+        <div class="modal-meta">
+          <div class="meta-row">
+            <span class="meta-label">Format</span>
+            <span class="meta-value">TikTok Live &amp; Community Strategy</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Result</span>
+            <span class="meta-value">$30K/month</span>
+          </div>
+          <div class="meta-row">
+            <span class="meta-label">Country</span>
+            <span class="meta-value">United Kingdom</span>
+          </div>
+        </div>
+        <div class="modal-body">
+          <p>Smith was the kind of creator you don't come across often — a natural on camera, genuinely knowledgeable, with real charisma that translated directly to screen. He was crossing from crypto into FX and commodities, building an audience as he went.</p>
+          <p>But natural talent without strategy only gets you so far. He had no structured TikTok Live approach, no community, and no monetization path. We worked across four areas simultaneously — his live strategy, broker monetization, community build, and cross-platform growth. Each piece designed to reinforce the others.</p>
+          <p>Within 30 days, his community had 7,000 members, his TikTok Lives were pulling 500+ average viewers, and monthly revenue hit $30K. Smith's natural talent was the engine — our infrastructure was the fuel system.</p>
+        </div>
+      </div>
+    </div>
+
+  </body>
+</html>

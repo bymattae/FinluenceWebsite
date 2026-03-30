@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Finluence</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
+    <style>
+      *{box-sizing:border-box;margin:0;padding:0}
+
+      :root {
+        --bg: #0a0f0e;
+        --card: #111a18;
+        --border: rgba(16,185,129,0.1);
+        --text-1: #ffffff;
+        --text-2: rgba(255,255,255,0.85);
+        --text-3: rgba(255,255,255,0.85);
+        --blue: #0ea5e9;
+        --purple: #10b981;
+        --accent: #06b6d4;
+        --accent-warm: #34d399;
+        --radius: 16px;
+        --gap: 8px;
+      }
+
+      html { scroll-behavior: smooth; }
+
+      body {
+        background: var(--bg);
+        color: var(--text-2);
+        font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+        font-size: 15px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: inherit; text-decoration: none; }
+      img { display: block; max-width: 100%; }
+
+      .wrap {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding-inline: 56px;
+      }
+
+      /* ─────────────────────── NAV ─────────────────────── */
+      nav {
+        position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+        background: transparent;
+      }
+
+      .nav-inner {
+        max-width: 100%; margin: 0 auto; padding-inline: 28px;
+        height: 64px;
+        display: flex; align-items: center; justify-content: space-between;
+      }
+
+      .logo {
+        font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+        text-transform: lowercase; color: var(--text-1);
+      }
+
+      .nav-links { display: flex; gap: 6px; align-items: center; }
+
+      .nav-links a {
+        font-size: 16px; font-weight: 500; color: #ffffff;
+        padding: 8px 20px;
+        border-radius: 999px;
+        border: none;
+        transition: all 250ms ease;
+        background: transparent;
+      }
+      .nav-links a:hover {
+        color: #0a0a0a;
+        background: #ffffff;
+      }
+
+      .nav-links .cta {
+        color: #ffffff;
+        background: transparent;
+        font-weight: 500;
+      }
+      .nav-links .cta:hover {
+        color: #0a0a0a;
+        background: #ffffff;
+      }
+
+      /* ─────────────────────── HERO ─────────────────────── */
+      .hero {
+        position: relative;
+        height: 100svh; min-height: 600px;
+        display: flex; align-items: flex-end; justify-content: center;
+        padding-bottom: 80px;
+        overflow: hidden;
+      }
+
+      .hero video {
+        position: absolute; inset: 0;
+        width: 100%; height: 100%; object-fit: cover;
+        opacity: 0.4;
+      }
+
+      .hero::after {
+        content: ''; position: absolute; inset: 0;
+        background: linear-gradient(180deg, rgba(10,15,14,0) 0%, rgba(10,15,14,0) 30%, rgba(10,15,14,0.97) 100%);
+        z-index: 1;
+      }
+
+      .hero-content {
+        position: relative; z-index: 2;
+        text-align: center;
+        max-width: none; padding: 0 24px;
+      }
+
+      .hero h1 {
+        font-size: clamp(36px, 4.5vw, 62px);
+        font-weight: 600; line-height: 0.95;
+        white-space: nowrap;
+        letter-spacing: -0.04em; color: var(--text-1);
+        margin-bottom: 16px;
+      }
+
+      .hero h1 em {
+        font-style: italic;
+      }
+
+      .hero p {
+        font-size: 18px; color: var(--text-2);
+        margin-bottom: 0;
+        font-weight: 400; line-height: 1.7;
+      }
+
+      .btn {
+        display: inline-flex; align-items: center; justify-content: center;
+        padding: 11px 24px; border-radius: 999px;
+        font-size: 13px; font-weight: 600; border: none; cursor: pointer;
+        transition: transform 120ms, opacity 120ms;
+      }
+      .btn:hover { transform: translateY(-1px); }
+
+      .btn--ghost {
+        background: rgba(255,255,255,0.06);
+        color: var(--text-1);
+        border: 1px solid rgba(255,255,255,0.1);
+      }
+      .btn--ghost:hover { background: rgba(255,255,255,0.1); }
+
+      .btn--purple {
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+      .btn--purple:hover {
+        background: #f0f0f0;
+      }
+
+      .btn--blue {
+        background: #ffffff;
+        color: #0a0a0a;
+      }
+      .btn--dark {
+        background: #0a0a0a;
+        color: #fff;
+      }
+
+      /* ─────────────────────── BENTO CARDS ─────────────────────── */
+      .bento {
+        padding: 32px 0;
+      }
+
+      .bento-grid {
+        display: grid;
+        grid-template-columns: 1.6fr 0.7fr 0.7fr;
+        grid-template-rows: 380px;
+        gap: 16px;
+      }
+
+      .card {
+        border-radius: 24px;
+        border: none;
+        overflow: hidden;
+        position: relative;
+      }
+
+      /* ── Statement card ── */
+      .card--statement {
+        background: url('public/moon.png') center / cover no-repeat;
+        padding: 32px 36px;
+        display: flex; flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+        position: relative;
+        overflow: hidden;
+      }
+      .statement-divider {
+        width: 100%;
+        height: 1px;
+        background: rgba(255,255,255,0.12);
+        margin: 24px 0;
+        order: 2;
+      }
+      .statement-logos {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 32px;
+        order: 3;
+      }
+      .statement-logos img {
+        height: 42px;
+        width: auto;
+        opacity: 0.55;
+        filter: brightness(10);
+      }
+      .statement-logos img[alt="VT Markets"] {
+        height: 104px;
+      }
+
+      .card--statement h2 {
+        font-size: clamp(30px, 3.2vw, 44px);
+        font-weight: 600; line-height: 1.1;
+        letter-spacing: -0.035em;
+        white-space: nowrap;
+        color: #ffffff;
+        position: relative;
+        order: -1;
+        margin-bottom: 16px;
+      }
+
+      .card--statement p {
+        font-size: 18px; line-height: 1.7;
+        color: #ffffff;
+        max-width: 42ch; position: relative;
+        order: 1;
+        margin-bottom: 8px;
+        font-weight: 400;
+      }
+
+      /* ── Photo card ── */
+      .card--photo { position: relative; }
+      .card--photo img {
+        width: 100%; height: 100%; object-fit: cover;
+        transition: transform 600ms ease;
+      }
+      .card--photo:hover img { transform: scale(1.03); }
+
+      .card--photo .overlay {
+        position: absolute; inset: 0;
+        background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.4) 35%, transparent 65%);
+      }
+      .card--photo .label {
+        position: absolute; bottom: 24px; left: 24px;
+      }
+      .card--photo .label strong {
+        display: block; font-size: 30px; font-weight: 600;
+        letter-spacing: -0.03em; color: #fff; line-height: 1.15;
+      }
+      .card--photo .label span {
+        display: block;
+        font-size: 13px;
+        color: #ffffff;
+        margin-top: 6px;
+      }
+
+      /* ── Countries card ── */
+      .card--countries {
+        background: url('public/creators/countries-bg-3.jpg') center / cover no-repeat;
+        padding: 24px;
+        display: flex; flex-direction: column;
+        border-color: transparent;
+      }
+      .card--countries h3 {
+        display: none;
+      }
+      .card--countries ul {
+        list-style: none; flex: 1;
+        display: flex; flex-direction: column;
+        justify-content: space-between;
+      }
+      .card--countries li {
+        display: flex; align-items: center; gap: 10px;
+        padding: 4px 0;
+        border-bottom: none;
+        font-size: 14px; font-weight: 600;
+        color: #ffffff;
+      }
+      .card--countries li:last-child { border: none; }
+      .card--countries li img {
+        width: 24px; height: 24px; border-radius: 50%; object-fit: cover;
+      }
+
+      /* ─────────────────────── MANAGEMENT SECTION ─────────────────────── */
+      .mgmt {
+        padding: 32px 0;
+      }
+
+      .mgmt-grid {
+        display: grid;
+        grid-template-columns: 52fr 48fr;
+        gap: 40px;
+        min-height: 340px;
+      }
+
+      /* Photo card */
+      .mgmt-photo {
+        border-radius: var(--radius); overflow: hidden;
+        position: relative; isolation: isolate;
+        border: 1px solid var(--border);
+      }
+      .mgmt-photo .bg {
+        position: absolute; inset: 0; z-index: -2;
+        background: url('public/team-studio.jpg') center center / cover;
+      }
+      .mgmt-photo .scrim {
+        position: absolute; inset: 0; z-index: -1;
+        background:
+          linear-gradient(180deg, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.05) 45%),
+          linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.05) 45%);
+      }
+      .mgmt-photo .inner {
+        position: absolute; inset: 0;
+        padding: 28px;
+        display: flex; flex-direction: column;
+        justify-content: space-between;
+      }
+      .mgmt-photo h3 {
+        font-size: clamp(30px, 3.2vw, 44px);
+        font-weight: 600; line-height: 1.1;
+        letter-spacing: -0.03em; color: var(--text-1);
+      }
+
+      .mgmt-photo .btn-row { align-self: flex-end; }
+
+      /* Right info column — centered vertically like reference */
+      .mgmt-info {
+        display: flex; flex-direction: column;
+        justify-content: center;
+        gap: 20px;
+        height: 100%;
+      }
+
+      .mgmt-info p {
+        font-size: 22px; line-height: 1.7;
+        color: var(--text-2);
+        font-weight: 500;
+      }
+      .mgmt-info p strong {
+        color: #fff; font-weight: 600;
+      }
+
+      /* Magic text reveal */
+      .magic-text {
+        display: flex;
+        flex-wrap: wrap;
+        line-height: 1.35;
+      }
+      .magic-text .word {
+        position: relative;
+        margin-right: 0.3em;
+        font-size: clamp(20px, 1.9vw, 28px);
+        font-weight: 500;
+        line-height: 1.5;
+      }
+      .magic-text .word .ghost {
+        opacity: 0.25;
+        color: #ffffff;
+      }
+      .magic-text .word .reveal {
+        position: absolute;
+        top: 0; left: 0;
+        color: #ffffff;
+        opacity: 0;
+        transition: opacity 0.05s ease;
+      }
+
+      /* Stats row */
+      .stats-bar {
+        display: flex;
+        align-items: center;
+        gap: 0;
+        margin-top: 24px;
+      }
+
+      .stat {
+        display: flex; flex-direction: column;
+        text-align: left;
+        padding: 0;
+      }
+      .stat + .stat {
+        margin-left: 32px;
+        padding-left: 32px;
+        border-left: 1px solid rgba(255,255,255,0.12);
+      }
+
+      .stat .num {
+        font-size: clamp(28px, 2.6vw, 38px);
+        font-weight: 700; letter-spacing: -0.03em;
+        line-height: 1; color: #fff;
+      }
+      .stat .lbl {
+        font-size: 13px; font-weight: 400;
+        color: #ffffff;
+        margin-top: 6px;
+        line-height: 1.5;
+      }
+
+      /* ─────────────────────── CHOOSE PATH ─────────────────────── */
+      .paths {
+        padding: 32px 0;
+      }
+
+      .paths h2 {
+        font-size: clamp(30px, 3.5vw, 44px);
+        font-weight: 600; letter-spacing: -0.04em;
+        line-height: 1.1; color: var(--text-1);
+        margin-bottom: 20px;
+      }
+
+      .paths-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      .path-card {
+        border-radius: 20px; overflow: hidden;
+        position: relative; height: 320px;
+        display: flex; align-items: center;
+        text-align: center;
+        border: none;
+      }
+
+      .path-card--creators {
+        background: url('public/creators-card.jpg') center / cover no-repeat;
+        justify-content: flex-end;
+      }
+      .path-card--brokers {
+        background: url('public/brokers-card.jpg') center / cover no-repeat;
+        justify-content: flex-start;
+      }
+
+      .path-card .bg {
+        position: absolute; z-index: 3;
+        background-size: contain; background-repeat: no-repeat;
+      }
+      .path-card--creators .bg {
+        left: 0;
+        height: 160%; bottom: -4%;
+        background-image: url('public/creators-path.png');
+        background-position: left bottom;
+        width: 50%;
+      }
+      .path-card--brokers .bg {
+        right: -2%;
+        height: 220%; bottom: -24%;
+        background-image: url('public/brokers-path.png');
+        background-position: right bottom;
+        width: 65%;
+      }
+
+      .path-card .scrim { display: none; }
+
+      .path-card .content {
+        position: relative; z-index: 2;
+        padding: 28px 36px;
+        display: flex; flex-direction: column; align-items: center;
+        gap: 12px;
+        background: rgba(255,255,255,0.12);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        border: none;
+        border-radius: 16px;
+        margin: 24px;
+        width: 55%;
+      }
+      .path-card .content h3 {
+        font-size: clamp(22px, 2.2vw, 30px); font-weight: 600;
+        letter-spacing: -0.03em; color: #ffffff;
+        line-height: 1.1;
+      }
+      br.mobile-br { display: block; }
+
+      .path-card .content p {
+        font-size: 16px; color: #ffffff;
+        max-width: 18ch; line-height: 1.7;
+        font-weight: 400;
+        text-wrap: balance;
+      }
+      .path-card .content .btn {
+        margin-top: 4px;
+      }
+
+      /* ─────────────────────── FOOTER ─────────────────────── */
+      footer {
+        background: #0a0a0a;
+        padding: 60px 0 40px;
+        text-align: center;
+      }
+
+      .footer-inner {
+        display: flex; flex-direction: column;
+        align-items: center; gap: 32px;
+      }
+
+      .footer-logo {
+        font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+        text-transform: lowercase; color: #ffffff; display: block; margin-bottom: 8px;
+      }
+
+      .footer-tagline {
+        font-size: 15px; color: rgba(255,255,255,0.45); font-weight: 400; line-height: 1.5;
+      }
+
+      .footer-nav {
+        display: flex; flex-direction: column; gap: 14px; align-items: center;
+      }
+
+      .footer-nav-row {
+        display: flex; gap: 28px; align-items: center;
+        flex-wrap: wrap; justify-content: center;
+      }
+
+      .footer-nav-row a {
+        font-size: 14px; color: rgba(255,255,255,0.6); font-weight: 400;
+        transition: color 150ms;
+      }
+      .footer-nav-row a:hover { color: #ffffff; }
+
+      .footer-book-call {
+        display: inline-flex; align-items: center;
+        font-size: 13px; font-weight: 600; color: #ffffff;
+        border: 1px solid rgba(255,255,255,0.22); border-radius: 999px;
+        padding: 6px 18px; transition: border-color 150ms, background 150ms;
+      }
+      .footer-book-call:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+
+      .footer-subscribe {
+        display: flex; flex-direction: column; align-items: center; gap: 12px;
+      }
+
+      .footer-subscribe-label {
+        font-size: 13px; font-weight: 500; color: rgba(255,255,255,0.45);
+      }
+
+      .footer-email-form {
+        display: flex; align-items: center;
+        border-radius: 999px; background: #ffffff;
+        padding: 4px 4px 4px 20px; width: 320px; max-width: 100%;
+      }
+      .footer-email-form input {
+        flex: 1; background: none; border: none; outline: none;
+        color: #0a0a0a; font-size: 14px; font-family: 'Plus Jakarta Sans', sans-serif;
+        padding: 10px 0;
+      }
+      .footer-email-form input::placeholder { color: rgba(0,0,0,0.35); }
+      .footer-email-form button {
+        width: 36px; height: 36px; border-radius: 50%;
+        border: none; background: #0a0a0a; cursor: pointer;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0; transition: opacity 200ms;
+      }
+      .footer-email-form button:hover { opacity: 0.7; }
+      .footer-email-form button svg {
+        width: 15px; height: 15px; fill: none;
+        stroke: #ffffff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      .footer-socials {
+        display: flex; gap: 10px; justify-content: center;
+      }
+      .footer-socials a {
+        width: 44px; height: 44px; border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.15);
+        display: flex; align-items: center; justify-content: center;
+        transition: border-color 150ms, background 150ms;
+      }
+      .footer-socials a:hover { border-color: rgba(255,255,255,0.4); background: rgba(255,255,255,0.05); }
+      .footer-socials a svg {
+        width: 16px; height: 16px; fill: none; stroke: #ffffff;
+        stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round;
+      }
+
+      .footer-copy {
+        display: flex; gap: 12px; align-items: center; justify-content: center;
+        flex-wrap: wrap;
+        font-size: 12px; color: rgba(255,255,255,0.25);
+        padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06);
+        width: 100%;
+      }
+      .footer-copy a {
+        font-size: 12px; color: rgba(255,255,255,0.35); font-weight: 400;
+        transition: color 150ms;
+      }
+      .footer-copy a:hover { color: rgba(255,255,255,0.7); }
+
+      /* ─────────────────────── RESPONSIVE ─────────────────────── */
+      @media (max-width: 1024px) {
+        .wrap { padding-inline: 32px; }
+        .nav-inner { padding-inline: 32px; }
+
+        .bento-grid {
+          grid-template-columns: 1fr 1fr;
+          grid-template-rows: 260px 260px;
+        }
+        .card--statement { grid-column: 1 / -1; }
+
+        .mgmt-grid { grid-template-columns: 1fr; height: auto; padding: 0; }
+        .mgmt-photo { min-height: 300px; }
+
+      }
+
+      /* Hamburger */
+      .nav-toggle {
+        display: none;
+        background: none; border: none; cursor: pointer;
+        width: 28px; height: 20px;
+        position: relative; z-index: 101;
+      }
+      .nav-toggle span {
+        display: block; width: 100%; height: 2px;
+        background: #fff; border-radius: 2px;
+        transition: all 250ms;
+      }
+      .nav-toggle span:nth-child(2) { margin: 6px 0; }
+      .nav-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 6px); }
+      .nav-toggle.active span:nth-child(2) { opacity: 0; }
+      .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -6px); }
+
+      @media (max-width: 680px) {
+        .wrap { padding-inline: 20px; }
+        .nav-inner { padding-inline: 20px; }
+
+        .nav-toggle { display: flex; flex-direction: column; justify-content: center; }
+
+        .nav-links {
+          display: none;
+          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+          background: rgba(0,0,0,0.95);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          flex-direction: column;
+          align-items: center; justify-content: center;
+          gap: 12px;
+          z-index: 100;
+        }
+        .nav-links.open { display: flex; }
+        .nav-links a {
+          font-size: 20px; padding: 12px 28px;
+        }
+
+        .hero h1 { font-size: clamp(36px, 8vw, 52px); }
+
+        .bento-grid {
+          grid-template-columns: 1fr;
+          grid-template-rows: auto;
+        }
+        .card--statement { min-height: 180px; }
+        .card--statement p { font-size: 13px; line-height: 1.5; max-width: 100%; }
+        .statement-logos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 20px; align-items: center; justify-items: center; }
+        .statement-logos img { height: 28px; }
+        .statement-logos img[alt="VT Markets"] { height: 52px; }
+        .card--photo { height: 220px; }
+
+        .paths-grid { grid-template-columns: 1fr; gap: 16px; }
+        .path-card {
+          height: auto; min-height: 420px;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-end !important;
+          text-align: center;
+        }
+        .path-card .bg {
+          width: 70% !important; height: 60% !important;
+          top: 0; bottom: auto !important;
+          left: 50% !important; right: auto !important;
+          transform: translateX(-50%);
+          background-position: center top !important;
+          -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%) !important;
+          mask-image: linear-gradient(to bottom, black 40%, transparent 100%) !important;
+        }
+        .path-card--brokers .bg {
+          width: 90% !important; height: 75% !important;
+        }
+        .path-card .content {
+          width: calc(100% - 24px) !important;
+          margin: 0 12px 12px !important;
+          padding: 18px 16px 24px;
+          align-items: center;
+        }
+        .path-card .content h3 { font-size: 28px; }
+        br.mobile-br { display: block; }
+
+        /* ── Centre all section text & buttons ── */
+        .card--statement { text-align: center; align-items: center; }
+        .mgmt-info { text-align: center; align-items: center; }
+        .mgmt-info p { font-size: 14px; text-align: center; }
+        .stats-bar { justify-content: center; }
+        .stat { text-align: center; }
+        .paths h2 { text-align: center; }
+        .stat { padding: 20px; }
+        .stat .num { font-size: 24px; }
+
+        .footer-email-form { width: 100%; }
+
+        .bento, .mgmt, .paths { padding: 24px 0; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <nav>
+      <div class="nav-inner">
+        <a class="logo" href="#top">finluence</a>
+        <button class="nav-toggle" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+          <a href="#top">Home</a>
+          <a href="creators.html">Creators</a>
+          <a href="#brokers">Brokers</a>
+          <a href="#partners">Network</a>
+          <a href="#about">About</a>
+        </div>
+      </div>
+    </nav>
+
+    <main id="top">
+
+      <section class="hero">
+        <video autoplay muted loop playsinline>
+          <source src="public/hero-gushcloud.mp4" type="video/mp4" />
+        </video>
+        <div class="hero-content">
+          <h1>We are <em>trading media.</em></h1>
+          <p>Built for the new era of finance.</p>
+          <a class="btn btn--purple" href="#about" style="margin-top: 24px; padding: 14px 36px; font-size: 15px;">Learn More</a>
+        </div>
+      </section>
+
+      <section class="bento" id="about">
+        <div class="wrap">
+          <div class="bento-grid">
+
+            <article class="card card--statement">
+              <h2>Industry recognised.</h2>
+              <p>At the heart of trading media — building<br>the culture and connections that define it.</p>
+              <div class="statement-divider"></div>
+              <div class="statement-logos">
+                <img src="public/AxiNew.png" alt="Axi" />
+                <img src="public/PUPrimeNew.png" alt="PU Prime" />
+                <img src="public/VantageNew.png" alt="Vantage" />
+                <img src="public/vtmarkets-removebg-preview.png" alt="VT Markets" />
+              </div>
+            </article>
+
+            <article class="card card--photo">
+              <img src="public/655264693_17998371089876914_8748685727068770635_n.jpg" alt="Finluence" />
+              <div class="overlay"></div>
+              <div class="label">
+                <strong>Since 2016</strong>
+                <span>Trading media, before it was a thing.</span>
+              </div>
+            </article>
+
+            <article class="card card--countries" id="partners">
+              <h3>Where we operate</h3>
+              <ul>
+                <li><img src="https://flagcdn.com/w40/kr.png" alt="" />South Korea</li>
+                <li><img src="https://flagcdn.com/w40/jp.png" alt="" />Japan</li>
+                <li><img src="https://flagcdn.com/w40/cn.png" alt="" />China</li>
+                <li><img src="https://flagcdn.com/w40/ae.png" alt="" />United Arab Emirates</li>
+                <li><img src="https://flagcdn.com/w40/us.png" alt="" />United States</li>
+                <li><img src="https://flagcdn.com/w40/fr.png" alt="" />France</li>
+                <li><img src="https://flagcdn.com/w40/sg.png" alt="" />Singapore</li>
+                <li><img src="https://flagcdn.com/w40/th.png" alt="" />Thailand</li>
+                <li><img src="https://flagcdn.com/w40/gb.png" alt="" />United Kingdom</li>
+                <li><img src="https://flagcdn.com/w40/za.png" alt="" />South Africa</li>
+              </ul>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="mgmt">
+        <div class="wrap">
+          <div class="mgmt-grid">
+
+            <div class="mgmt-photo">
+              <div class="bg"></div>
+              <div class="scrim"></div>
+              <div class="inner">
+                <div>
+                  <span style="font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #ffffff; display: block; margin-bottom: 8px;">WHAT WE DO</span>
+                  <h3>We run trading media.</h3>
+                </div>
+              </div>
+            </div>
+
+            <div class="mgmt-info">
+              <div class="magic-text" data-magic-text>Finluence operates across content, live events and brand partnerships — working hands-on with the trading industry's top creators and brokers across the globe.</div>
+              <div class="stats-bar">
+                <div class="stat">
+                  <div class="num">$100M+</div>
+                  <div class="lbl">generated collectively.</div>
+                </div>
+                <div class="stat">
+                  <div class="num">26+</div>
+                  <div class="lbl">partners worldwide.</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      <section class="paths" id="creators">
+        <div class="wrap">
+          <h2>Choose your path:</h2>
+          <div class="paths-grid">
+            <article class="path-card path-card--creators">
+              <div class="bg"></div>
+              <div class="content">
+                <h3>Creators</h3>
+                <p>Your audience is worth more than you think.</p>
+                <a class="btn btn--purple" href="#contact">I'm a Creator</a>
+              </div>
+            </article>
+            <article class="path-card path-card--brokers" id="brokers">
+              <div class="bg"></div>
+              <div class="content">
+                <h3>Brokers</h3>
+                <p>Your brand deserves better than banner ads.</p>
+                <a class="btn btn--purple" href="#contact">I'm a Broker</a>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <footer id="contact">
+      <div class="wrap">
+        <div class="footer-inner">
+
+          <!-- Row 1: Logo + tagline -->
+          <div>
+            <span class="footer-logo">finluence</span>
+            <p class="footer-tagline">Media for the trading world.</p>
+          </div>
+
+          <!-- Row 2: Newsletter -->
+          <div class="footer-subscribe">
+            <form class="footer-email-form" onsubmit="return false;">
+              <input type="email" placeholder="Your email address" />
+              <button type="submit" aria-label="Subscribe">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+            </form>
+          </div>
+
+          <!-- Row 3: Socials -->
+          <div class="footer-socials">
+            <a href="#" aria-label="Instagram">
+              <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg viewBox="0 0 24 24"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58A2.78 2.78 0 0 0 3.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 0 0 1.95-1.95A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="#fff" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg viewBox="0 0 24 24"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/></svg>
+            </a>
+            <a href="#" aria-label="X">
+              <svg viewBox="0 0 24 24"><path d="M4 4l6.5 8L4 20h2l5.5-6.5L16 20h4l-6.5-8L20 4h-2l-5.5 6.5L8 4H4z" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+
+          <!-- Row 4: Legal links -->
+          <div class="footer-copy">
+            <a href="#">About Us</a>
+            <span>·</span>
+            <a href="mailto:hello@finluence.com">Contact Us</a>
+            <span>·</span>
+            <a href="#">Terms &amp; Conditions</a>
+            <span>·</span>
+            <a href="#">Privacy Policy</a>
+            <span>·</span>
+            <a href="#">Cookies Policy</a>
+          </div>
+
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const toggle = document.querySelector('.nav-toggle');
+      const links = document.querySelector('.nav-links');
+      toggle.addEventListener('click', () => {
+        toggle.classList.toggle('active');
+        links.classList.toggle('open');
+      });
+      links.querySelectorAll('a').forEach(a => {
+        a.addEventListener('click', () => {
+          toggle.classList.remove('active');
+          links.classList.remove('open');
+        });
+      });
+    </script>
+
+    <script>
+      // Magic text scroll reveal
+      document.querySelectorAll('[data-magic-text]').forEach(container => {
+        const text = container.textContent.trim();
+        container.textContent = '';
+        const words = text.split(' ');
+
+        words.forEach(word => {
+          const span = document.createElement('span');
+          span.className = 'word';
+          span.innerHTML = `<span class="ghost">${word}</span><span class="reveal">${word}</span>`;
+          container.appendChild(span);
+        });
+
+        const revealWords = () => {
+          const rect = container.getBoundingClientRect();
+          const start = window.innerHeight * 0.9;
+          const end = window.innerHeight * 0.25;
+          const progress = Math.min(1, Math.max(0, (start - rect.top) / (start - end)));
+
+          const wordEls = container.querySelectorAll('.word .reveal');
+          wordEls.forEach((el, i) => {
+            const wordStart = i / wordEls.length;
+            const wordEnd = wordStart + 1 / wordEls.length;
+            const wordProgress = Math.min(1, Math.max(0, (progress - wordStart) / (wordEnd - wordStart)));
+            el.style.opacity = wordProgress;
+          });
+        };
+
+        window.addEventListener('scroll', revealWords, { passive: true });
+        revealWords();
+      });
+    </script>
+
+  </body>
+</html>
