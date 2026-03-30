@@ -65,7 +65,7 @@
       .nav-links { display: flex; gap: 6px; align-items: center; }
 
       .nav-links a {
-        font-size: 16px; font-weight: 500; color: #ffffff;
+        font-size: 14px; font-weight: 500; color: #ffffff;
         padding: 8px 20px;
         border-radius: 999px;
         border: none;
@@ -115,7 +115,7 @@
       }
 
       .hero h1 {
-        font-size: clamp(36px, 4.5vw, 62px);
+        font-size: clamp(32px, 3.8vw, 48px);
         font-weight: 600; line-height: 0.95;
         white-space: nowrap;
         letter-spacing: -0.04em; color: var(--text-1);
@@ -433,11 +433,11 @@
       }
 
       .path-card--creators {
-        background: url('public/creators-card.jpg') center / cover no-repeat;
+        background: url('public/creatorscardbg.jpg') center / cover no-repeat;
         justify-content: flex-end;
       }
       .path-card--brokers {
-        background: url('public/brokers-card.jpg') center / cover no-repeat;
+        background: url('public/brokerscardbg.jpg') center / cover no-repeat;
         justify-content: flex-start;
       }
 
@@ -611,6 +611,8 @@
 
       }
 
+      .nav-close { display: none; }
+
       /* Hamburger */
       .nav-toggle {
         display: none;
@@ -634,21 +636,49 @@
 
         .nav-toggle { display: flex; flex-direction: column; justify-content: center; }
 
-        .nav-links {
+        /* Mobile drawer overlay */
+        .nav-overlay {
           display: none;
-          position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-          background: rgba(0,0,0,0.95);
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
+          position: fixed; inset: 0; z-index: 99;
+          background: rgba(0,0,0,0.5);
+        }
+        .nav-overlay.open { display: block; }
+
+        .nav-links {
+          display: flex !important;
+          position: fixed; top: 0; right: 0; bottom: 0;
+          width: 62%;
+          background: #0a0a0a;
           flex-direction: column;
-          align-items: center; justify-content: center;
-          gap: 12px;
+          align-items: flex-start; justify-content: center;
+          gap: 0;
+          padding: 48px 40px;
           z-index: 100;
+          transform: translateX(100%);
+          transition: transform 300ms cubic-bezier(0.4,0,0.2,1);
         }
-        .nav-links.open { display: flex; }
+        .nav-links.open { transform: translateX(0); }
         .nav-links a {
-          font-size: 20px; padding: 12px 28px;
+          font-size: 28px; font-weight: 500;
+          padding: 14px 0;
+          border-radius: 0;
+          background: transparent !important;
+          color: #fff !important;
+          width: 100%;
         }
+        .nav-links .cta {
+          display: none;
+        }
+        /* X close button inside drawer */
+        .nav-close {
+          display: none;
+          position: fixed; top: 20px; right: 20px;
+          z-index: 101;
+          background: none; border: none;
+          color: #fff; font-size: 26px; cursor: pointer;
+          line-height: 1; padding: 4px;
+        }
+        .nav-close.open { display: block; }
 
         .hero h1 { font-size: clamp(36px, 8vw, 52px); }
 
@@ -710,16 +740,18 @@
   </head>
   <body>
 
+    <div class="nav-overlay" id="navOverlay"></div>
+    <button class="nav-close" id="navClose" aria-label="Close menu">&#x2715;</button>
     <nav>
       <div class="nav-inner">
         <a class="logo" href="#top">finluence</a>
         <button class="nav-toggle" aria-label="Menu">
           <span></span><span></span><span></span>
         </button>
-        <div class="nav-links">
+        <div class="nav-links" id="navLinks">
           <a href="#top">Home</a>
           <a href="creators.html">Creators</a>
-          <a href="#brokers">Brokers</a>
+          <a href="brokers.html">Brokers</a>
           <a href="#partners">Network</a>
           <a href="#about">About</a>
         </div>
@@ -826,7 +858,7 @@
               <div class="content">
                 <h3>Creators</h3>
                 <p>Your audience is worth more than you think.</p>
-                <a class="btn btn--purple" href="#contact">I'm a Creator</a>
+                <a class="btn btn--purple" href="creators.html">I'm a Creator</a>
               </div>
             </article>
             <article class="path-card path-card--brokers" id="brokers">
@@ -834,7 +866,7 @@
               <div class="content">
                 <h3>Brokers</h3>
                 <p>Your brand deserves better than banner ads.</p>
-                <a class="btn btn--purple" href="#contact">I'm a Broker</a>
+                <a class="btn btn--purple" href="brokers.html">I'm a Broker</a>
               </div>
             </article>
           </div>
@@ -898,17 +930,27 @@
 
     <script>
       const toggle = document.querySelector('.nav-toggle');
-      const links = document.querySelector('.nav-links');
-      toggle.addEventListener('click', () => {
-        toggle.classList.toggle('active');
-        links.classList.toggle('open');
-      });
-      links.querySelectorAll('a').forEach(a => {
-        a.addEventListener('click', () => {
-          toggle.classList.remove('active');
-          links.classList.remove('open');
-        });
-      });
+      const links = document.getElementById('navLinks');
+      const overlay = document.getElementById('navOverlay');
+      const closeBtn = document.getElementById('navClose');
+
+      function openMenu() {
+        links.classList.add('open');
+        overlay.classList.add('open');
+        closeBtn.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeMenu() {
+        links.classList.remove('open');
+        overlay.classList.remove('open');
+        closeBtn.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      toggle.addEventListener('click', openMenu);
+      closeBtn.addEventListener('click', closeMenu);
+      overlay.addEventListener('click', closeMenu);
+      links.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
     </script>
 
     <script>
