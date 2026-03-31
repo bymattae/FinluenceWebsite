@@ -462,7 +462,7 @@
             <img class="case-logo" src="public/bdswiss-logo.png" alt="BDSwiss" />
             <div class="case-info">
               <div class="case-tag">Creator Campaign</div>
-              <div class="case-title">33,000 FTDs in Under 12 Months — BDSwiss</div>
+              <div class="case-title">33,000 FTDs in Under 12 Months</div>
             </div>
           </div>
           <div class="case-card" onclick="openCase('cs-vantage')" style="cursor:pointer;">
@@ -471,7 +471,7 @@
             <img class="case-logo" src="public/VantageNew.png" alt="Vantage" style="height:52px;" />
             <div class="case-info">
               <div class="case-tag">Retention &amp; Growth</div>
-              <div class="case-title">$100M+ in Deposits — Vantage Markets</div>
+              <div class="case-title">$100M+ in Deposits</div>
             </div>
           </div>
           <div class="case-card" onclick="openCase('cs-bullo')" style="cursor:pointer;">
@@ -480,7 +480,7 @@
             <img class="case-logo" src="public/bullo-logo.png" alt="Bullo" />
             <div class="case-info">
               <div class="case-tag">Brand Strategy &amp; Sponsorships</div>
-              <div class="case-title">60,000 Waitlist Signups — Bullo</div>
+              <div class="case-title">60,000 Waitlist Signups</div>
             </div>
           </div>
         </div>
